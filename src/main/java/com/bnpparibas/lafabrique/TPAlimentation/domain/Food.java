@@ -12,16 +12,17 @@ public class Food {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @ManyToOne
     private FoodSubGroup foodSubGroup;
 
+    @ManyToOne
     private FoodSubSubGroup foodSubSubGroup;
 
     @NaturalId
     @Column(unique = true)
     private String food_code; // public id of food
 
-    private String alim_nom_sci;
+    private String alimNomSci;
 
     @NaturalId
     @Column(length = 150)
@@ -46,7 +47,7 @@ public class Food {
         this.foodSubGroup = foodSubGroup;
         this.foodSubSubGroup = foodSubSubGroup;
         this.food_code = food_code;
-        this.alim_nom_sci = alim_nom_sci;
+        this.alimNomSci = alim_nom_sci;
         this.foodName = foodName;
         this.kJEnergy = kJEnergy;
         this.kCalEnergy = kCalEnergy;
@@ -85,12 +86,12 @@ public class Food {
         this.food_code = food_code;
     }
 
-    public String getAlim_nom_sci() {
-        return alim_nom_sci;
+    public String getAlimNomSci() {
+        return alimNomSci;
     }
 
-    public void setAlim_nom_sci(String alim_nom_sci) {
-        this.alim_nom_sci = alim_nom_sci;
+    public void setAlimNomSci(String alimNomSci) {
+        this.alimNomSci = alimNomSci;
     }
 
     public String getFoodName() {

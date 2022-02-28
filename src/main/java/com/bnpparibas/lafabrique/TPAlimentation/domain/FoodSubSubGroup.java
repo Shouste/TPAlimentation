@@ -9,7 +9,7 @@ public class FoodSubSubGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, length = 6)
     private String publicId; //Id contenu dans le fichier d'origine
 
     @Column(length = 50)

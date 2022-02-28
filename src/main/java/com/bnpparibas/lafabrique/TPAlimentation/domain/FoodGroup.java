@@ -9,7 +9,7 @@ public class FoodGroup {
     @GeneratedValue(strategy =GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, length = 2)
     private String publicId; //Id contenu dans le fichier d'origine
 
     @Column(length = 50)

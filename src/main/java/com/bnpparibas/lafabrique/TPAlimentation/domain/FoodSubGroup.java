@@ -2,13 +2,14 @@ package com.bnpparibas.lafabrique.TPAlimentation.domain;
 
 import javax.persistence.*;
 
+@Entity
 public class FoodSubGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, length = 4)
     private String publicId; //Id contenu dans le fichier d'origine
 
     @Column(length = 50)

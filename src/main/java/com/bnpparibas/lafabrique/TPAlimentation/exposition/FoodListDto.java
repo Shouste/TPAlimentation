@@ -1,25 +1,25 @@
 package com.bnpparibas.lafabrique.TPAlimentation.exposition;
 
-import com.bnpparibas.lafabrique.TPAlimentation.domain.FoodSubGroup;
-import com.bnpparibas.lafabrique.TPAlimentation.domain.FoodSubSubGroup;
-
 public class FoodListDto {
 
     private final String food_code; // public id of food
 
     private final String foodName;
 
-    private final FoodSubGroup foodSubGroup;
+    private final String foodGroupName;
 
-    private final FoodSubSubGroup foodSubSubGroup;
+    private final String foodSubGroupName;
+
+    private final String foodSubSubGroupName;
 
     //Constructor
 
-    public FoodListDto(String food_code, String foodName, FoodSubGroup foodSubGroup, FoodSubSubGroup foodSubSubGroup) {
+    public FoodListDto(String food_code, String foodName, String foodGroupName, String foodSubGroupName, String foodSubSubGroupName) {
         this.food_code = food_code;
         this.foodName = foodName;
-        this.foodSubGroup = foodSubGroup;
-        this.foodSubSubGroup = foodSubSubGroup;
+        this.foodGroupName = foodGroupName;
+        this.foodSubGroupName = foodSubGroupName;
+        this.foodSubSubGroupName = foodSubSubGroupName;
     }
 
     //Getters
@@ -32,12 +32,16 @@ public class FoodListDto {
         return foodName;
     }
 
-    public FoodSubGroup getFoodSubGroup() {
-        return foodSubGroup;
+    public String getFoodGroupName() {
+        return foodGroupName;
     }
 
-    public FoodSubSubGroup getFoodSubSubGroup() {
-        return foodSubSubGroup;
+    public String getFoodSubGroupName() {
+        return foodSubGroupName;
+    }
+
+    public String getFoodSubSubGroupName() {
+        return foodSubSubGroupName;
     }
 
 }
