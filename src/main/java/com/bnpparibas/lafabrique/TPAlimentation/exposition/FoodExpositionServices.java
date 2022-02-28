@@ -6,8 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.NoResultException;
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequestMapping("/food")
@@ -19,13 +23,29 @@ public class FoodExpositionServices {
     @GetMapping("/name={name}")
     public List<FoodListDto> getFoodByName(@PathVariable("name") String name){
 
-        return foodServices.getFoodByName(name);
+        try {
+
+            return foodServices.getFoodByName(name);
+        }
+
+        catch (NoResultException e){
+            throw new ResponseStatusException(NOT_FOUND, e.getMessage(), e);
+        }
+
     }
 
     @GetMapping("/id={id}")
-    public FoodDto getFoodById(@PathVariable("id") String id){
+    public FoodDto getFoodById(@PathVariable("id") String id) {
 
-        return foodServices.getFoodById(id);
+        try {
+
+            return foodServices.getFoodById(id);
+
+        }
+
+        catch (NoResultException e){
+            throw new ResponseStatusException(NOT_FOUND, e.getMessage(), e);
+        }
 
     }
 
