@@ -1,6 +1,7 @@
 package com.bnpparibas.lafabrique.TPAlimentation.infrastructure;
 
 import com.bnpparibas.lafabrique.TPAlimentation.domain.Food;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.sql.Select;
@@ -21,9 +22,14 @@ public class DaoFoodImpl implements IDaoFood {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         //TO DO
+        String crit = "%"+name+"%";
+        Query query = session.createQuery("select f from Food f where f.foodName like :name");
+        query.setParameter("name", crit);
+
+        List<Food> foodList = query.getResultList();
         session.close();
 
-        return null;
+        return foodList;
     }
 
     @Override
