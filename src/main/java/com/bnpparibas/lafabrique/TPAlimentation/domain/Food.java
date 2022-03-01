@@ -8,9 +8,9 @@ import java.util.List;
 @Entity
 public class Food {
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String food_code; // public id of food
 
     @ManyToOne
     private FoodSubGroup foodSubGroup;
@@ -18,32 +18,28 @@ public class Food {
     @ManyToOne
     private FoodSubSubGroup foodSubSubGroup;
 
-    @NaturalId
-    @Column(unique = true)
-    private String food_code; // public id of food
-
     private String alimNomSci;
 
     @NaturalId
     @Column(length = 150)
     private String foodName;
 
-    private double kJEnergy; // Energie, Règlement UE N° 1169/2011 (kJ/100 g)
+    private String kJEnergy; // Energie, Règlement UE N° 1169/2011 (kJ/100 g)
 
-    private double kCalEnergy; //Energie, Règlement UE N° 1169/2011 (kcal/100 g)
+    private String kCalEnergy; //Energie, Règlement UE N° 1169/2011 (kcal/100 g)
 
-    private double kJwithFibersEnergy; // Energie, N x facteur Jones kJ
+    private String kJwithFibersEnergy; // Energie, N x facteur Jones kJ
 
-    private double kcalwithFibersEnergy; //Energie, N x facteur Jones kCal
+    private String kcalwithFibersEnergy; //Energie, N x facteur Jones kCal
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER )
     private List<Component> listComponents;
 
     //Constructors
 
     public Food(){}
 
-    public Food(FoodSubGroup foodSubGroup, FoodSubSubGroup foodSubSubGroup, String food_code, String alim_nom_sci, String foodName, double kJEnergy, double kCalEnergy, double kJwithFibersEnergy, double kcalwithFibersEnergy, List<Component> listComponents) {
+    public Food(FoodSubGroup foodSubGroup, FoodSubSubGroup foodSubSubGroup, String food_code, String alim_nom_sci, String foodName, String kJEnergy, String kCalEnergy, String kJwithFibersEnergy, String kcalwithFibersEnergy, List<Component> listComponents) {
         this.foodSubGroup = foodSubGroup;
         this.foodSubSubGroup = foodSubSubGroup;
         this.food_code = food_code;
@@ -57,10 +53,6 @@ public class Food {
     }
 
     //Getters & Setters
-
-    public Long getId() {
-        return id;
-    }
 
     public FoodSubGroup getFoodSubGroup() {
         return foodSubGroup;
@@ -102,35 +94,35 @@ public class Food {
         this.foodName = foodName;
     }
 
-    public double getkJEnergy() {
+    public String getkJEnergy() {
         return kJEnergy;
     }
 
-    public void setkJEnergy(double kJEnergy) {
+    public void setkJEnergy(String kJEnergy) {
         this.kJEnergy = kJEnergy;
     }
 
-    public double getkCalEnergy() {
+    public String getkCalEnergy() {
         return kCalEnergy;
     }
 
-    public void setkCalEnergy(double kCalEnergy) {
+    public void setkCalEnergy(String kCalEnergy) {
         this.kCalEnergy = kCalEnergy;
     }
 
-    public double getkJwithFibersEnergy() {
+    public String getkJwithFibersEnergy() {
         return kJwithFibersEnergy;
     }
 
-    public void setkJwithFibersEnergy(double kJwithFibersEnergy) {
+    public void setkJwithFibersEnergy(String kJwithFibersEnergy) {
         this.kJwithFibersEnergy = kJwithFibersEnergy;
     }
 
-    public double getKcalwithFibersEnergy() {
+    public String getKcalwithFibersEnergy() {
         return kcalwithFibersEnergy;
     }
 
-    public void setKcalwithFibersEnergy(double kcalwithFibersEnergy) {
+    public void setKcalwithFibersEnergy(String kcalwithFibersEnergy) {
         this.kcalwithFibersEnergy = kcalwithFibersEnergy;
     }
 

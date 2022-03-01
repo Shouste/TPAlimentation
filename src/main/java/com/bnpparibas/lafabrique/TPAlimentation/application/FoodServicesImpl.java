@@ -48,9 +48,14 @@ public class FoodServicesImpl implements IFoodServices {
             componentDtoList.add(new ComponentDto(comp.getComponentType(), comp.getQuantity()));
         }
 
+        String subSubGroupName = null;
+        if (food.getFoodSubSubGroup() != null){
+            subSubGroupName = food.getFoodSubSubGroup().getName();
+        }
+
         return new FoodDto( food.getFoodSubGroup().getFoodGroup().getName(),
                             food.getFoodSubGroup().getName(),
-                            food.getFoodSubGroup().getName(),
+                            subSubGroupName,
                             food.getFood_code(),
                             food.getAlimNomSci(),
                             food.getFoodName(),

@@ -16,19 +16,19 @@ public class FoodDto {
 
     private final String foodName;
 
-    private final double kJEnergy; // Energie, Règlement UE N° 1169/2011 (kJ/100 g)
+    private final String kJEnergy; // Energie, Règlement UE N° 1169/2011 (kJ/100 g)
 
-    private final double kCalEnergy; //Energie, Règlement UE N° 1169/2011 (kcal/100 g)
+    private final String kCalEnergy; //Energie, Règlement UE N° 1169/2011 (kcal/100 g)
 
-    private final double kJwithFibersEnergy; // Energie, N x facteur Jones kJ
+    private final String kJwithFibersEnergy; // Energie, N x facteur Jones kJ
 
-    private final double kcalwithFibersEnergy; //Energie, N x facteur Jones kCal
+    private final String kcalwithFibersEnergy; //Energie, N x facteur Jones kCal
 
     private final List<ComponentDto> listComponentsDto;
 
     //Constructor
 
-    public FoodDto(String foodGroupName, String foodSubGroupName, String foodSubSubGroupName, String food_code, String alimNomSci, String foodName, double kJEnergy, double kCalEnergy, double kJwithFibersEnergy, double kcalwithFibersEnergy, List<ComponentDto> listComponentsDto) {
+    public FoodDto(String foodGroupName, String foodSubGroupName, String foodSubSubGroupName, String food_code, String alimNomSci, String foodName, String kJEnergy, String kCalEnergy, String kJwithFibersEnergy, String kcalwithFibersEnergy, List<ComponentDto> listComponentsDto) {
         this.foodGroupName = foodGroupName;
         this.foodSubGroupName = foodSubGroupName;
         this.foodSubSubGroupName = foodSubSubGroupName;
@@ -68,19 +68,19 @@ public class FoodDto {
         return foodName;
     }
 
-    public double getkJEnergy() {
+    public String getkJEnergy() {
         return kJEnergy;
     }
 
-    public double getkCalEnergy() {
+    public String getkCalEnergy() {
         return kCalEnergy;
     }
 
-    public double getkJwithFibersEnergy() {
+    public String getkJwithFibersEnergy() {
         return kJwithFibersEnergy;
     }
 
-    public double getKcalwithFibersEnergy() {
+    public String getKcalwithFibersEnergy() {
         return kcalwithFibersEnergy;
     }
 

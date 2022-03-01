@@ -12,6 +12,8 @@
         <property name = "connection.password"> Axiel25? </property>
         <!-- Permet d'afficher les requêtes SQL -->
         <property name = "show_sql"> true </property>
+        <!-- Encodage UTF-8 -->
+        <property name="hibernate.connection.characterEncoding">utf8</property>
         <!-- Permet à Hibernate de créer les tables depuis les entités -->
         <property name = "hbm2ddl.auto"> update </property>
         <!-- Charger les entités -->

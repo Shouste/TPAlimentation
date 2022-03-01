@@ -16,11 +16,11 @@ public class TestFoodServicesImpl {
 
     final FoodGroup fg1 = new FoodGroup("01","groupe 1");
     final FoodSubGroup fsg1 = new FoodSubGroup("0101","sous-groupe1",fg1);
-    final Component c1 = new Component(ComponentType.FIBRES,45.0);
-    final Component c2 = new Component(ComponentType.GLUCOSE,22.0);
+    final Component c1 = new Component(ComponentType.FIBRES,"45.0");
+    final Component c2 = new Component(ComponentType.GLUCOSE,"22.0");
     final List<Component> cList = new ArrayList(Arrays.asList(c1,c2));
     final Food food1 = new Food(fsg1,null,"25601","","super plat",
-            12.587,23.5,54.8,41.9,cList);
+            "12.587","23.5","54.8","41.9",cList);
 
     IFoodServices foodServices = new FoodServicesImpl();
 

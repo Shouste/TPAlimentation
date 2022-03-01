@@ -6,11 +6,8 @@ import javax.persistence.*;
 public class FoodSubGroup {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(unique = true, length = 4)
-    private String publicId; //Id contenu dans le fichier d'origine
+    private String id; //Id contenu dans le fichier d'origine
 
     @Column(length = 50)
     private String name;
@@ -22,16 +19,16 @@ public class FoodSubGroup {
     // Constructors
     public FoodSubGroup(){}
 
-    public FoodSubGroup(String publicId, String name, FoodGroup foodGroup) {
-        this.publicId = publicId;
+    public FoodSubGroup(String id, String name, FoodGroup foodGroup) {
+        this.id = id;
         this.name = name;
         this.foodGroup = foodGroup;
     }
 
     // Getters & setters
 
-    public void setPublicId(String publicId) {
-        this.publicId = publicId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -42,12 +39,8 @@ public class FoodSubGroup {
         this.foodGroup = foodGroup;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
-    }
-
-    public String getPublicId() {
-        return publicId;
     }
 
     public String getName() {

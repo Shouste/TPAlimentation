@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.sql.Select;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.List;
 
@@ -34,10 +35,11 @@ public class DaoFoodImpl implements IDaoFood {
 
         try {
 
-            Query query = session.createQuery("select food from Food food where food.food_code = :code");
-            query.setParameter("code", id);
-
-            return (Food) query.getSingleResult();
+            Food food = session.find(Food.class,id);
+            if (food == null){
+                throw new NoResultException("Food not found");
+            }
+            return food;
 
         }
 

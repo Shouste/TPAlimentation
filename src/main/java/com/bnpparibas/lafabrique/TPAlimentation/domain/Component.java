@@ -14,12 +14,14 @@ public class Component {
 
     private ComponentType componentType; // Enum
 
-    private Double quantity;
+    private String quantity;
 
 
     // Constructor
 
-    public Component(ComponentType componentType, Double quantity) {
+    public Component() {}
+
+    public Component(ComponentType componentType, String quantity) {
         this.componentType = componentType;
         this.quantity = quantity;
     }
@@ -38,11 +40,11 @@ public class Component {
         this.componentType = componentType;
     }
 
-    public Double getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Double quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 

@@ -6,9 +6,9 @@ public class ComponentDto {
 
     private final ComponentType componentType; // Enum
 
-    private final Double quantity;
+    private final String quantity;
 
-    public ComponentDto(ComponentType componentType, Double quantity) {
+    public ComponentDto(ComponentType componentType, String quantity) {
         this.componentType = componentType;
         this.quantity = quantity;
     }
@@ -17,7 +17,7 @@ public class ComponentDto {
         return componentType;
     }
 
-    public Double getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
