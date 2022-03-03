@@ -1,11 +1,14 @@
 package com.bnpparibas.lafabrique.TPAlimentation.application;
 
+import com.bnpparibas.lafabrique.TPAlimentation.TpAlimentationApplication;
 import com.bnpparibas.lafabrique.TPAlimentation.domain.Component;
 import com.bnpparibas.lafabrique.TPAlimentation.domain.Food;
 import com.bnpparibas.lafabrique.TPAlimentation.exposition.ComponentDto;
 import com.bnpparibas.lafabrique.TPAlimentation.exposition.FoodDto;
 import com.bnpparibas.lafabrique.TPAlimentation.exposition.FoodListDto;
 import com.bnpparibas.lafabrique.TPAlimentation.infrastructure.IDaoFood;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,11 @@ import java.util.List;
 
 @Service
 public class FoodServicesImpl implements IFoodServices {
+
+    // TEST LOGGING
+    private static final Logger logger
+            = LoggerFactory.getLogger(FoodServicesImpl.class);
+
 
     @Autowired
     IDaoFood daoFood;
@@ -28,6 +36,8 @@ public class FoodServicesImpl implements IFoodServices {
         for(Food f : foodList){
             foodListDtos.add(convertFoodToFoodListDto(f));
         }
+
+        logger.info("Retour de getFoodByName pour {}", name);
 
         return foodListDtos;
     }
