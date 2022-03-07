@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.NoResultException;
+import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.*;

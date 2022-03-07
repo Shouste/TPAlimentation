@@ -1,10 +1,8 @@
-package com.bnpparibas.lafabrique.TPAlimentation.infrastructure;
+package com.bnpparibas.lafabrique.TPAlimentation.infrastructure.persistence;
 
 import com.bnpparibas.lafabrique.TPAlimentation.domain.Food;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.sql.Select;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
@@ -21,7 +19,7 @@ public class DaoFoodImpl implements IDaoFood {
         SessionFactory sessionFactory = DaoFactory.createSession();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        //TO DO
+
         String crit = "%"+name+"%";
         Query query = session.createQuery("select f from Food f where f.foodName like :name");
         query.setParameter("name", crit);
@@ -41,7 +39,11 @@ public class DaoFoodImpl implements IDaoFood {
 
         try {
 
-            Food food = session.find(Food.class,id);
+            Query query = session.createQuery(
+                    "select f from Food f join fetch f.listComponents where f.id = :id");
+            query.setParameter("id", id);
+            Food food = (Food) query.getSingleResult();
+
             if (food == null){
                 throw new NoResultException("Food not found");
             }

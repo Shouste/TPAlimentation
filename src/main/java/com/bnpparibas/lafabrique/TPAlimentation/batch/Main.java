@@ -1,7 +1,7 @@
 package com.bnpparibas.lafabrique.TPAlimentation.batch;
 
 import com.bnpparibas.lafabrique.TPAlimentation.domain.*;
-import com.bnpparibas.lafabrique.TPAlimentation.infrastructure.DaoFactory;
+import com.bnpparibas.lafabrique.TPAlimentation.infrastructure.persistence.DaoFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 

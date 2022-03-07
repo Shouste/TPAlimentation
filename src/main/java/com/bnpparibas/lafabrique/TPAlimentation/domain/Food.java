@@ -32,7 +32,7 @@ public class Food {
 
     private String kcalwithFibersEnergy; //Energie, N x facteur Jones kCal
 
-    @OneToMany(fetch = FetchType.EAGER )
+    @OneToMany(fetch = FetchType.LAZY )
     private List<Component> listComponents;
 
     //Constructors

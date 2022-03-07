@@ -1,12 +1,12 @@
 package com.bnpparibas.lafabrique.TPAlimentation.application;
 
-import com.bnpparibas.lafabrique.TPAlimentation.TpAlimentationApplication;
 import com.bnpparibas.lafabrique.TPAlimentation.domain.Component;
 import com.bnpparibas.lafabrique.TPAlimentation.domain.Food;
 import com.bnpparibas.lafabrique.TPAlimentation.exposition.ComponentDto;
 import com.bnpparibas.lafabrique.TPAlimentation.exposition.FoodDto;
 import com.bnpparibas.lafabrique.TPAlimentation.exposition.FoodListDto;
-import com.bnpparibas.lafabrique.TPAlimentation.infrastructure.IDaoFood;
+import com.bnpparibas.lafabrique.TPAlimentation.infrastructure.external.IChuckNorrisJokes;
+import com.bnpparibas.lafabrique.TPAlimentation.infrastructure.persistence.IDaoFood;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +22,11 @@ public class FoodServicesImpl implements IFoodServices {
     private static final Logger logger
             = LoggerFactory.getLogger(FoodServicesImpl.class);
 
-
     @Autowired
     IDaoFood daoFood;
+
+    @Autowired
+    IChuckNorrisJokes chuckNorrisJokes;
 
     @Override
     public List<FoodListDto> getFoodByName(String name) {
@@ -37,7 +39,8 @@ public class FoodServicesImpl implements IFoodServices {
             foodListDtos.add(convertFoodToFoodListDto(f));
         }
 
-        logger.info("Retour de getFoodByName pour {}", name);
+        String joke = chuckNorrisJokes.getALittleJoke();
+        logger.info("A little joke from Chuck Norris makes my day : {}", joke);
 
         return foodListDtos;
     }
