@@ -3,6 +3,7 @@ package com.bnpparibas.lafabrique.TPAlimentation.domain;
 import javax.persistence.*;
 
 @Entity
+@Table(name="FoodSubGroup")
 public class FoodSubGroup {
 
     @Id
@@ -14,7 +15,6 @@ public class FoodSubGroup {
 
     @ManyToOne
     private FoodGroup foodGroup;
-
 
     // Constructors
     public FoodSubGroup(){}

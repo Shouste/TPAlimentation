@@ -3,6 +3,7 @@ package com.bnpparibas.lafabrique.TPAlimentation.domain;
 import javax.persistence.*;
 
 @Entity
+@Table(name="FoodGroup")
 public class FoodGroup {
 
     @Id

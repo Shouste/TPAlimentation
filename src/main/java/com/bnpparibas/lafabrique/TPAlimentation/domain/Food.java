@@ -6,10 +6,12 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name="Food")
 public class Food {
 
 
     @Id
+    @Column(name = "food_code")
     private String food_code; // public id of food
 
     @ManyToOne
@@ -18,20 +20,26 @@ public class Food {
     @ManyToOne
     private FoodSubSubGroup foodSubSubGroup;
 
+    @Column(name = "alimNomSci")
     private String alimNomSci;
 
     @NaturalId
-    @Column(length = 150)
+    @Column(length = 150, name = "foodName")
     private String foodName;
 
+    @Column(name = "kJEnergy")
     private String kJEnergy; // Energie, Règlement UE N° 1169/2011 (kJ/100 g)
 
+    @Column(name = "kCalEnergy")
     private String kCalEnergy; //Energie, Règlement UE N° 1169/2011 (kcal/100 g)
 
+    @Column(name = "kJwithFibersEnergy")
     private String kJwithFibersEnergy; // Energie, N x facteur Jones kJ
 
+    @Column(name = "kcalwithFibersEnergy")
     private String kcalwithFibersEnergy; //Energie, N x facteur Jones kCal
 
+    @Column(name = "listComponents")
     @OneToMany(fetch = FetchType.LAZY )
     private List<Component> listComponents;
 
