@@ -1,6 +1,8 @@
 package com.bnpparibas.lafabrique.TPAlimentation.exposition;
 
 import com.bnpparibas.lafabrique.TPAlimentation.application.IFoodServices;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +23,12 @@ public class FoodExpositionServices {
     @Autowired
     IFoodServices foodServices;
 
+    @ApiOperation(value = "Get a list of food by name", notes ="Response = list of all foods containing the provided name. " +
+            "The search is case-sensitive\n Example : /food/name=Pastis")
     @GetMapping("/name={name}")
-    public List<FoodListDto> getFoodByName(@PathVariable("name") String name){
+    public List<FoodListDto> getFoodByName(
+            @ApiParam(value = "Name of searched food. Case-sensitive", required = true)
+            @PathVariable("name") String name){
 
         try {
 
@@ -35,8 +41,11 @@ public class FoodExpositionServices {
 
     }
 
+    @ApiOperation(value = "Get a food by its id", notes = "Example : /food/id=1000")
     @GetMapping("/id={id}")
-    public FoodDto getFoodById(@PathVariable("id") String id) {
+    public FoodDto getFoodById(
+            @ApiParam(value = "Id of searched food", required = true)
+            @PathVariable("id") String id) {
 
         try {
 
