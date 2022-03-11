@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -48,9 +47,13 @@ public class FoodServicesImpl implements IFoodServices {
     @Override
     public List<FoodListDto> getFoodByName(String name) {
 
+        if (!foodNameIsValid(name)){
+            throw new IllegalArgumentException("Food name should be a string with letters, space, - '");
+        }
+
         List<FoodListDto> foodListDtos = new ArrayList<>();
 
-        List<Food> foodList =  daoFood.getFoodByName(name);
+        List<Food> foodList =  daoFood.findFirst10ByFoodNameContaining(name.toLowerCase());
 
         for(Food f : foodList){
             foodListDtos.add(convertFoodToFoodListDto(f));
@@ -64,9 +67,37 @@ public class FoodServicesImpl implements IFoodServices {
 
     @Override
     public FoodDto getFoodById(String id) {
-        //Food food =  daoFood.getFoodById(id);
+        if (!foodIdIsValid(id)){
+            throw new IllegalArgumentException("Food id should contain only digits");
+        }
         Food food =  daoFood.findFoodByFood_code(id);
         return convertFoodToFoodDto(food);
+    }
+
+    private boolean foodIdIsValid(String id){
+        // Food id should be an integer
+
+        if (id.length() == 0){
+            return false;
+        }
+        try {Integer.parseInt(id);}
+        catch (NumberFormatException e){
+            return false;
+        }
+
+        return true;
+    }
+
+
+    private boolean foodNameIsValid(String name){
+        // Food name should contain letters
+
+        if (name.length() == 0){
+            return false;
+        }
+
+        // toutes lettres minuscules et majuscules, y compris les caractères accentués, ainsi que le blanc et le tiret
+        return name.matches("[a-zA-Z-'\\sÀÁÂÃÄÅÇÑñÇÈÉÊËÌÍÎÏÒÓÔÕÖØÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöøùúûüýÿ]+");
 
     }
 
@@ -159,8 +190,10 @@ public class FoodServicesImpl implements IFoodServices {
     // Il existe aussi des bibliothèques qui permettent de manipuler les csv plus facilement (utiliser les entêtes de
     // colonne pour faire référence aux colonnes, etc
     // ex : Apache Commons CSV (attention aux vulnérabilités)
+
     public List<String> parseRecord(String record){
-        return Arrays.asList(record.split(";"));
+
+        return Arrays.asList(record.toLowerCase().split(";"));
     }
 
     public void insertFoodIntoDb(List<String> stringArray){
