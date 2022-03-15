@@ -3,15 +3,22 @@ package com.bnpparibas.lafabrique.TPAlimentation;
 import com.bnpparibas.lafabrique.TPAlimentation.application.FoodServicesImpl;
 import com.bnpparibas.lafabrique.TPAlimentation.application.IFoodServices;
 import com.bnpparibas.lafabrique.TPAlimentation.domain.*;
+import com.bnpparibas.lafabrique.TPAlimentation.infrastructure.persistence.IDaoFoodWithSpringData;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
-
+@SpringBootTest
 public class TestFoodServicesImpl {
 
     final FoodGroup fg1 = new FoodGroup("01","groupe 1");
@@ -22,7 +29,18 @@ public class TestFoodServicesImpl {
     final Food food1 = new Food(fsg1,null,"25601","","super plat",
             "12.587","23.5","54.8","41.9",cList);
 
-    IFoodServices foodServices = new FoodServicesImpl();
+    @Autowired
+    private IFoodServices foodServices;
+
+    @MockBean
+    private IDaoFoodWithSpringData daoFoodWithSpringData;
+
+    @Test
+    public void shouldReturn_1_Result_WhenIdOK(){
+        when(daoFoodWithSpringData.findFoodByFood_code("10")).thenReturn(food1);
+        assertThat(foodServices.getFoodById("10").getFoodCode().equals("25601")).isTrue();
+    }
+
 
     @Test
     public void shouldReturn_ValidFoodDto_WhenFoodOK(){
