@@ -9,6 +9,7 @@ import com.bnpparibas.lafabrique.TPAlimentation.infrastructure.persistence.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -66,6 +67,7 @@ public class FoodServicesImpl implements IFoodServices {
     }
 
     @Override
+    @Cacheable(value = "food")
     public FoodDto getFoodById(String id) {
         if (!foodIdIsValid(id)){
             throw new IllegalArgumentException("Food id should contain only digits");
