@@ -4,6 +4,7 @@ import com.bnpparibas.lafabrique.TPAlimentation.application.IFoodServices;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ public class FoodExpositionServices {
     @ApiOperation(value = "Get a list of food by name", notes ="Response = list of all foods containing the provided name. " +
             "The search is case-sensitive\n Example : /food/name=Pastis")
     @GetMapping("/name={name}")
+    // @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
     public List<FoodListDto> getFoodByName(
             @ApiParam(value = "Name of searched food. Case-sensitive", required = true)
             @PathVariable("name") String name){
