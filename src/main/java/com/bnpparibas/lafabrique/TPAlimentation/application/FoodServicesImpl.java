@@ -78,6 +78,11 @@ public class FoodServicesImpl implements IFoodServices {
         return convertFoodToFoodDto(food);
     }
 
+    /**
+     * Controls food id is valid
+     * @param id = food id
+     * @return true/false
+     */
     private boolean foodIdIsValid(String id){
         // Food id should be an integer
 
@@ -101,7 +106,7 @@ public class FoodServicesImpl implements IFoodServices {
         }
 
         // toutes lettres minuscules et majuscules, y compris les caractères accentués, ainsi que le blanc et le tiret
-        return name.matches("[a-zA-Z-'\\sÀÁÂÃÄÅÇÑñÇÈÉÊËÌÍÎÏÒÓÔÕÖØÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöøùúûüýÿ]+");
+        return name.matches("[a-zA-Z-'\\sÀÁÂÃÄÅÇÑñÈÉÊËÌÍÎÏÒÓÔÕÖØÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöøùúûüýÿ]+");
 
     }
 
@@ -189,6 +194,12 @@ public class FoodServicesImpl implements IFoodServices {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public int countComponentsForFood(String id) {
+        Food food = daoFood.findFoodByFood_code(id);
+        return food.getListComponents().size();
     }
 
     // Il existe aussi des bibliothèques qui permettent de manipuler les csv plus facilement (utiliser les entêtes de

@@ -5,15 +5,15 @@ import com.bnpparibas.lafabrique.TPAlimentation.application.IFoodServices;
 import com.bnpparibas.lafabrique.TPAlimentation.domain.*;
 import com.bnpparibas.lafabrique.TPAlimentation.infrastructure.persistence.IDaoFoodWithSpringData;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -21,19 +21,23 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class TestFoodServicesImpl {
 
-    final FoodGroup fg1 = new FoodGroup("01","groupe 1");
-    final FoodSubGroup fsg1 = new FoodSubGroup("0101","sous-groupe1",fg1);
-    final Component c1 = new Component(ComponentType.FIBRES,"45.0");
-    final Component c2 = new Component(ComponentType.GLUCOSE,"22.0");
-    final List<Component> cList = new ArrayList(Arrays.asList(c1,c2));
-    final Food food1 = new Food(fsg1,null,"25601","","super plat",
+    final static FoodGroup fg1 = new FoodGroup("01","groupe 1");
+    final static FoodSubGroup fsg1 = new FoodSubGroup("0101","sous-groupe1",fg1);
+    final static Component c1 = new Component(ComponentType.FIBRES,"45.0");
+    final static Component c2 = new Component(ComponentType.GLUCOSE,"22.0");
+    final static List<Component> cList = new ArrayList(Arrays.asList(c1,c2));
+    final static Food food1 = new Food(fsg1,null,"25601","","super plat",
             "12.587","23.5","54.8","41.9",cList);
 
-    @Autowired
-    private IFoodServices foodServices;
-
-    @MockBean
+    //@MockBean OU :
+    @Mock
     private IDaoFoodWithSpringData daoFoodWithSpringData;
+
+    //@Autowired
+    //private IFoodServices foodServices;
+    // OU :
+    @InjectMocks
+    FoodServicesImpl foodServices;
 
     @Test
     public void shouldReturn_1_Result_WhenIdOK(){
@@ -65,6 +69,12 @@ public class TestFoodServicesImpl {
         assertThat(foodServices.convertFoodToFoodListDto(food1).getFoodName().equals("super plat")).isTrue();
         assertThat(foodServices.convertFoodToFoodListDto(food1).getFoodSubGroupName().equals("sous-groupe1")).isTrue();
         assertThat(foodServices.convertFoodToFoodListDto(food1).getFoodGroupName().equals("groupe 1")).isTrue();
+    }
+
+    @Test
+    public void shouldReturn_ValidCount_WhenFoodIdOK(){
+        when(daoFoodWithSpringData.findFoodByFood_code("25601")).thenReturn(food1);
+        assertThat(foodServices.countComponentsForFood("25601")).isEqualTo(2);
     }
 
 }

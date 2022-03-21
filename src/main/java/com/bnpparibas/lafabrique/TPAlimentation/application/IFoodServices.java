@@ -17,4 +17,7 @@ public interface IFoodServices {
     FoodListDto convertFoodToFoodListDto(Food food);
 
     void fileLoad();
+
+    int countComponentsForFood(String id);
+
 }
