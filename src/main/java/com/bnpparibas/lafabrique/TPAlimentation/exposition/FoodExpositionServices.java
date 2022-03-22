@@ -5,10 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.NoResultException;
@@ -59,6 +56,11 @@ public class FoodExpositionServices {
             throw new ResponseStatusException(NOT_FOUND, e.getMessage(), e);
         }
 
+    }
+
+    @GetMapping("/")
+    public void create(){
+        System.out.println("je peux créer");
     }
 
 }
